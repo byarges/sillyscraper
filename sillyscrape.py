@@ -13,7 +13,7 @@ thislist = []
 filterwords =["in","to", "the","News","for","of","on"]
 the_page = requests.get("https://www.foxnews.com/")
 soup = BeautifulSoup(the_page.content, 'html.parser')
-f = open("demofile.html", "w")
+f = open("/var/www/html/index.html", "w")
 counter=0
 lengthofcounter=0
 
