@@ -9,14 +9,12 @@ import requests
 import webbrowser
 from bs4 import BeautifulSoup
 
-
 site1="https://www.foxnews.com/"
 site2="https://www.nytimes.com/"
-chosenSite=["Fox News", "New York Times"]
 
-#f = open("index.html", "w")
-f = open("/var/www/html/index.html", "w")
-
+#local vs server toggle
+f = open("index.html", "w")
+#f = open("/var/www/html/index.html", "w")
 
 def scrapeTheNews(x):
 	thislist = []
@@ -32,26 +30,16 @@ def scrapeTheNews(x):
 	x=(soup.get_text())
 	y=x.split()
 
-
 	while counter<lengthofcounter:
 		for i in y:
 			if i == filterwords[counter]:
 				y.remove(i)
 		counter=counter+1
 
-
-
 	clean = Counter(y).most_common(100)
-	htmlfileFoxStart="Top 100 Headline Words of the Hour: </h1>"
-	output=(htmlfileFoxStart+"<p>"+str(clean)+"</p>")
+	htmlfileStart="Top 100 Headline Words of the Hour: </h1>"
+	output=(htmlfileStart+"<p>"+str(clean)+"</p>")
 	return output
-
-
-
 
 f.write("<h1> New York Times "+scrapeTheNews(site2)+"</h1>"+"<h1> Fox News "+scrapeTheNews(site1)+"</h1>")
 f.close()
-
-
-
-#scrapeTheNews(site)
