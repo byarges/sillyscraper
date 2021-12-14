@@ -42,14 +42,14 @@ def scrapeTheNews(x):
 				y.remove(i)
 		counter=counter+1
 
-	clean = Counter(y).most_common(20)
+	clean = Counter(y).most_common(50)
 	#htmlfileStart="Top 100 Headline Words of the Hour: </h1>"
 	output="<p>"+str(clean)+"</p>"
 	return output
 
 
 def readyToWrite(siteInput):
-	stringOutput="<h1>"+str(siteInput)+" top 20 words within this hour</h1>"
+	stringOutput="<h1>"+str(siteInput)+" top 50 words within this hour</h1>"
 	return stringOutput
 
 def combiner(siteForOutput):
