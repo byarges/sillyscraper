@@ -11,6 +11,11 @@ from bs4 import BeautifulSoup
 
 site1="https://www.foxnews.com/"
 site2="https://www.nytimes.com/"
+site3="https://www.cnn.com/"
+site4="https://www.yahoo.com/"
+site5="https://www.washingtonpost.com/"
+
+
 
 #local vs server toggle
 f = open("index.html", "w")
@@ -18,7 +23,8 @@ f = open("index.html", "w")
 
 def scrapeTheNews(x):
 	thislist = []
-	filterwords =["New","The","York","Times","in","to", "the","News","for","of","on", "+", "and","a","by","with","is","as","be","after","are","at","or","&","|"]
+	filterwords =["New","The","York","Times",
+	"in","to", "the","News","for","of","on", "+", "and","a","by","with","is","as","be","after","are","at","or","&","|","from","Is","With","but","has","than","an","your","Do","But","it",">","which","that","have","will","they","That","can","Other","their","how","you","could","my","feedback!","hour","about"]
 	the_page = requests.get(x)
 	soup = BeautifulSoup(the_page.content, 'html.parser')
 	counter=0
@@ -36,10 +42,22 @@ def scrapeTheNews(x):
 				y.remove(i)
 		counter=counter+1
 
-	clean = Counter(y).most_common(100)
-	htmlfileStart="Top 100 Headline Words of the Hour: </h1>"
-	output=(htmlfileStart+"<p>"+str(clean)+"</p>")
+	clean = Counter(y).most_common(20)
+	#htmlfileStart="Top 100 Headline Words of the Hour: </h1>"
+	output="<p>"+str(clean)+"</p>"
 	return output
 
-f.write("<h1> New York Times "+scrapeTheNews(site2)+"</h1>"+"<h1> Fox News "+scrapeTheNews(site1)+"</h1>")
+
+def readyToWrite(siteInput):
+	stringOutput="<h1>"+str(siteInput)+" top 20 words within this hour</h1>"
+	return stringOutput
+
+def combiner(siteForOutput):
+	x=readyToWrite(siteForOutput)+scrapeTheNews(siteForOutput)
+	return x
+
+f.write(combiner(site1)+combiner(site2)+combiner(site3)+combiner(site4)+combiner(site5))
+
+
+
 f.close()
