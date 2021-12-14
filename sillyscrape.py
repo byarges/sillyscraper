@@ -18,8 +18,8 @@ site5="https://www.washingtonpost.com/"
 
 
 #local vs server toggle
-f = open("index.html", "w")
-#f = open("/var/www/html/index.html", "w")
+#f = open("index.html", "w")
+f = open("/var/www/html/index.html", "w")
 
 def scrapeTheNews(x):
 	thislist = []
